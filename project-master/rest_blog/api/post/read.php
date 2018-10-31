@@ -24,11 +24,11 @@
 		$db = new Conexao();
 		$con = $db->getConexao();
 
-	    $categoria = new Post($con);
+	    $post = new Post($con);
 
 	    $resultado = $post->read();
 
-	    $qtde_cats = sizeof($resultado);
+	    $qtde_posts = sizeof($resultado);
 
 	    if($qtde_posts>0){
 	        // $arr_posts = array();
