@@ -1,18 +1,18 @@
 <?php
- 	if(!isset($_SERVER['PHP_AUTH_USER'])){
- 		header('WWW-Authenitcate: Basic realm="Página Restrita"');
+ 	// if(!isset($_SERVER['PHP_AUTH_USER'])){
+ 	// 	header('WWW-Authenitcate: Basic realm="Página Restrita"');
 
- 		header('HTTP/1.0 401 Unauthorized');
+ 	// 	header('HTTP/1.0 401 Unauthorized');
 
- 		echo json_encode(["mensagem" => "Autenticação necessária"
- 			]);
+ 	// 	echo json_encode(["mensagem" => "Autenticação necessária"
+ 	// 		]);
 
- 		exit;
- 	}elseif (!($_SERVER['PHP_AUTH_USER'] == 'admin'
- 			 && $_SERVER['PHP_AUTH_PW']	== 'admin')){
- 				header('HTTP/1.0 401 Unauthorized');
-				echo json_encode(["mensagem" => "Usuário Inválido"]);
- 	}else{
+ 	// 	exit;
+ 	// }elseif (!($_SERVER['PHP_AUTH_USER'] == 'admin'
+ 	// 		 && $_SERVER['PHP_AUTH_PW']	== 'admin')){
+ 	// 			header('HTTP/1.0 401 Unauthorized');
+		// 		echo json_encode(["mensagem" => "Usuário Inválido"]);
+ 	// }else{
  			
 
 		header('Acess-Control-Allow-Origin: *');
@@ -26,7 +26,10 @@
 
 	    $categoria = new Categoria($con);
 
-	    $resultado = $categoria->read();
+//VERIFICAR SE FOI ENVIADO UM id VIA GET
+	    //SE NAO TEM ID, CHAMA read()
+	    $resultado = $categoria->read(1);
+	    //SE TEM ID, CHAMA read(id)
 
 	    $qtde_cats = sizeof($resultado);
 
@@ -39,4 +42,4 @@
 	        echo json_encode(array('mensagem' => 'nenhuma categoria encontrada'));
 	    }
 
-   	}
+   	// }
