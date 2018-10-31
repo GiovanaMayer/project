@@ -28,7 +28,13 @@
 
 //VERIFICAR SE FOI ENVIADO UM id VIA GET
 	    //SE NAO TEM ID, CHAMA read()
-	    $resultado = $categoria->read(1);
+	    if(isset($_GET['id'])){
+	    	 $resultado = $categoria->read($_GET['id']);
+	    }else{
+	    	$resultado = $categoria->read();
+	    }
+
+	   
 	    //SE TEM ID, CHAMA read(id)
 
 	    $qtde_cats = sizeof($resultado);
