@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>zeeeeasadsadas</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+</head>
+
+<style type="text/css">
+
+    *{
+        font-family: 'Roboto', sans-serif;
+    }
+
+    main {
+        display: flex;
+        width: 100vw;
+        min-height: 100vh;
+        flex-direction: column;
+    }
+
+    body {
+        margin: 0;
+        width: 100vw;
+        min-height: 100vh
+    }
+
+    header {
+        display: flex;
+        justify-content: space-around;
+        align-items: center;
+        height: 12vh;
+        background: #c619a1;
+        color: white
+    }
+
+    header div.cat{
+        display: flex;
+        flex-grow: 1;
+        text-align: center;
+        justify-content: center;
+        align-items: center;
+        height: 100%
+
+    }
+
+    header div.cat:hover{
+        cursor: pointer
+    }
+
+    section{
+        display: flex;
+        align-items: center;
+        flex-direction: column;
+        background: #e56ec9
+    }
+
+    section div.post{
+        min-height: 20vh;
+        min-width: 60vw;
+        text-align: center;
+        background: #a82b8b;
+        border: 2px solid white;
+        color: white
+
+    }
+
+</style>
+<body>
+    <main>
+        <header>
+
+        </header>
+        <section>
+
+        </section>
+    </main>
+</body>
+
+<script type="text/javascript">
+    var header = document.querySelector('header')
+    var section = document.querySelector('section')
+
+    async function buscarDados(argument) {
+        var dadosBanco = await fetch('categoria/read.php')
+        var resp = await dadosBanco.json()
+
+        resp.forEach((value) => {
+            header.innerHTML += `<div class="cat">${value.nome}</div>`
+        })
+
+    }
+
+    async function buscarPosts(){
+        var dadosBanco = await fetch('post/read.php')
+        var resp = await dadosBanco.json()
+
+        resp.forEach((value)=>{
+            section.innerHTML += `<div class="post"><div class="title">${value.titulo}</div><div class="text">${value.texto}</div></div>`
+        })
+    }
+    buscarPosts()
+    buscarDados()
+</script>
+
+</html>

@@ -8,10 +8,10 @@
     	$con = $db->getConexao();
 
         $dados = json_decode(file_get_contents("php://input"));
-
         $categoria = new Categoria($con);
         $categoria->nome = $dados->nome;
         $categoria->descricao = $dados->descricao;
+        print_r($dados);
 
         if($categoria->create()) {
         	$res = array('mensagem','Categoria criada');
