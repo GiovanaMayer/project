@@ -43,10 +43,9 @@ CREATE TABLE `categoria` (
 CREATE TABLE `post` (
   `id` int(11) NOT NULL,
   `titulo` varchar(200) NOT NULL,
-  `texto` int(11) NOT NULL,
+  `texto` varchar(30) NOT NULL,
   `id_categoria` int(11) NOT NULL,
-  `autor` int(11) NOT NULL,
-  `dt_criacao` int(11) NOT NULL
+  `autor` varchar(30) NOT NULL,
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 
 --
@@ -92,6 +91,19 @@ ALTER TABLE `post`
 ALTER TABLE `post`
   ADD CONSTRAINT `fk_categoria` FOREIGN KEY (`id_categoria`) REFERENCES `categoria` (`id`);
 COMMIT;
+
+INSERT INTO categoria (nome,descricao) VALUES
+('Games','Notícias'),
+('Esportes','Tudo sobre futebol e outros esportes'),
+('Entretenimento','Notícias sobre o mundo do cinema'),
+('Drogas','Bora f1');
+
+INSERT INTO post (titulo,texto,id_categoria,autor) VALUES
+('Post1','Vamo jogar um lolzin',1,'Jorge'),
+('Post2','Futebol é top',2,'Eu'),
+('Post3','Esquadrão suícida é ruim',3,'Eu 2018'),
+('Post4','KJKJKJKJ GRAZADO',4,'Didi');
+
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
 /*!40101 SET CHARACTER_SET_RESULTS=@OLD_CHARACTER_SET_RESULTS */;
