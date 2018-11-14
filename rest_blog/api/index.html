@@ -88,13 +88,22 @@
         var resp = await dadosBanco.json()
 
         resp.forEach((value) => {
-            header.innerHTML += `<div class="cat">${value.nome}</div>`
+            console.log(value.id);
+            header.innerHTML += `<div class="cat" data-value="+${value.id}+">${value.nome}</div>`
         })
 
     }
 
-    async function buscarPosts(){
-        var dadosBanco = await fetch('post/read.php')
+    async function buscarPosts(id=null){
+        var dadosBanco
+        
+
+        if(id==null){
+            dadosBanco = await fetch('post/read.php')
+        }else{
+            dadosBanco = await fetch('post/read.php?id='+id)
+        }
+
         var resp = await dadosBanco.json()
 
         resp.forEach((value)=>{

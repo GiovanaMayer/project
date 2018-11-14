@@ -93,15 +93,15 @@ ALTER TABLE `post`
 COMMIT;
 
 INSERT INTO categoria (nome,descricao) VALUES
-('Games','Notícias'),
+('Games','Noticias'),
 ('Esportes','Tudo sobre futebol e outros esportes'),
-('Entretenimento','Notícias sobre o mundo do cinema'),
+('Entretenimento','Noticias sobre o mundo do cinema'),
 ('Drogas','Bora f1');
 
 INSERT INTO post (titulo,texto,id_categoria,autor) VALUES
 ('Post1','Vamo jogar um lolzin',1,'Jorge'),
-('Post2','Futebol é top',2,'Eu'),
-('Post3','Esquadrão suícida é ruim',3,'Eu 2018'),
+('Post2','Futebol e top',2,'Eu'),
+('Post3','Esquadrao suicida e ruim',3,'Eu 2018'),
 ('Post4','KJKJKJKJ GRAZADO',4,'Didi');
 
 
