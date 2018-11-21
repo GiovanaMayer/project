@@ -6,6 +6,7 @@
     <title>blog</title>
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <link href="https://fonts.googleapis.com/css?family=Roboto" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 </head>
 
 <style type="text/css">
@@ -32,7 +33,7 @@
         justify-content: space-around;
         align-items: center;
         height: 12vh;
-        background: #c619a1;
+        background: #8968CD;
         color: white
     }
 
@@ -55,19 +56,56 @@
         display: flex;
         align-items: center;
         flex-direction: column;
-        background: #e56ec9
+        background: #AB82FF
     }
 
     section div.post{
         min-height: 20vh;
         min-width: 60vw;
         text-align: center;
-        background: #a82b8b;
+        background: #5D478B;
         border: 2px solid white;
         color: white;
         font-size: 4vh
+    }
 
+    footer{
+        display: flex;
+        align-items: flex-start;
+        text-align: center;
+        background: #8968CD;
+        border: 2px solid white;
+        color: white;
+        font-size: 1.3em
+    }
 
+    footer div.name{
+        min-height: 20vh;
+        min-width: 19.7vw;
+        display: flex;
+        align-items: center;
+        text-align: center;
+        flex-direction: column;
+        background: #5D478B
+        ;
+        border: 2px solid white;
+        justify-content: space-between
+    }
+
+    .material-icons { 
+        font-size: 48px; 
+        color: lightblue
+    }
+
+        .sun{
+            color: yellow
+        }
+
+    .icons {
+        display: flex;
+        width: 80%;
+        flex-direction: row;
+        justify-content: space-around
     }
 
 </style>
@@ -79,12 +117,16 @@
         <section>
 
         </section>
+        <footer>
+            
+        </footer>
     </main>
 </body>
 
 <script type="text/javascript">
     var header = document.querySelector('header')
     var section = document.querySelector('section')
+    var footer = document.querySelector('footer')
 
     async function buscarDados(argument) {
         var dadosBanco = await fetch('categoria/read.php')
@@ -114,8 +156,32 @@
             section.innerHTML += `<div class="post"><div class="title">${value.titulo}</div><div class="text">${value.texto}</div></div>`
         })
     }
+
+    async function buscarTempo(lat, long){
+        var dadosTempo
+
+
+
+        dadosTempo = await fetch(`http://api.openweathermap.org/data/2.5/weather?lat=${lat}&lon=${long}&units=metric&lang=pt&APPID=c144ba4eaa5f0aebc01c661169701dc7`)
+
+        var resp = await dadosTempo.json()
+        console.log(resp)
+        // resp.forEach((value)=>{
+            footer.innerHTML += `<div class="name"><div class="icons"><i class="material-icons sun">wb_sunny</i><i class="material-icons">cloud</i></div>CIDADE: ${resp.name}<div class="temp">TEMPERATURA MÁXIMA: ${resp.main.temp_max}</div><div class="temp_min">TEMPERATURA MÍNIMA: ${resp.main.temp_min}</div><div class="umidade">UMIDADE: ${resp.main.humidity}</div><div class="description">DESCRIÇÃO: ${resp.weather[0].description}</div><div class="vento">VELOCIDADE DO VENTO: ${resp.wind.speed}</div></div>`
+        // <!-- }) -->
+    }
+
+    function pegarLocal(){
+        navigator.geolocation.getCurrentPosition((e)=>{
+            let lat = e.coords.latitude;
+            let long = e.coords.longitude
+            buscarTempo(lat, long)
+        })
+    }
+
     buscarPosts()
     buscarDados()
+    pegarLocal()
 </script>
 
 </html>
